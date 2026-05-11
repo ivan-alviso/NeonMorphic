@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-brand-neon: #FF007F;
+  --color-brand-purple: #7B2CBF;
+  --color-brand-deep: #05010a;
+  --color-brand-magenta: #FF00FF;
+}
+
+@layer base {
+  body {
+    @apply bg-[#030005] text-slate-200 font-sans selection:bg-brand-neon selection:text-white;
+  }
+}
+
+@layer components {
+  .neon-card {
+    @apply relative border border-white/10 bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .neon-card-glow {
+    @apply absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl;
+    background: radial-gradient(circle at top right, rgba(255, 0, 127, 0.15), transparent 70%);
+  }
+
+  .tech-corner {
+    @apply relative border border-white/5 bg-black/40 backdrop-blur-md;
+  }
+
+  .tech-corner::before,
+  .tech-corner::after {
+    content: '';
+    @apply absolute w-4 h-4 border-brand-neon z-10 opacity-60;
+  }
+
+  /* Top Left */
+  .tech-corner::before {
+    @apply top-[-1px] left-[-1px] border-t-2 border-l-2;
+  }
+
+  /* Bottom Right */
+  .tech-corner::after {
+    @apply bottom-[-1px] right-[-1px] border-b-2 border-r-2;
+  }
+
+  .grid-bg {
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.05) 1px, transparent 1px),
+      linear-gradient(rgba(123, 44, 191, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123, 44, 191, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px, 80px 80px, 80px 80px;
+  }
+
+  .side-dots {
+    @apply fixed top-1/2 -translate-y-1/2 flex flex-col gap-8 z-40 pointer-events-none;
+  }
+
+  .side-dot {
+    @apply w-1.5 h-1.5 bg-white/20 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.1)];
+  }
+
+  .neon-text-glow {
+    text-shadow: 0 0 10px rgba(255, 0, 127, 0.5), 0 0 20px rgba(255, 0, 127, 0.3);
+  }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
